@@ -68,10 +68,11 @@ namespace FExtension
         {
             return selectorA(A).CompareTo(selectorB());
         }
+
         /// <summary>
         /// Calls passed Action for each item in IEnumerable collection
         /// </summary>
-        /// <typeparam name="T"><see cref="IEnumerable{T}"/></typeparam>
+        /// <typeparam name="T">Type of item</typeparam>
         /// <param name="source">Source Collection</param>
         /// <param name="action">Action that will be called for each item</param>
         /// <returns>Source Collection</returns>
