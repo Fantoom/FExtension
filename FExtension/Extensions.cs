@@ -2,7 +2,7 @@
 
 namespace FExtension
 {
-    public static class Ext 
+    public static class Extensions 
     {
         /// <summary>
         /// Checks Equality of two objects by selected fields/objects
