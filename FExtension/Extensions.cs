@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FExtension
 {
@@ -66,6 +67,21 @@ namespace FExtension
         public static int CompareSelectedTo<TInA, ComparableA, ComparableB>(this TInA A,  Func<TInA, ComparableA> selectorA, Func<ComparableB> selectorB) where ComparableA : IComparable where ComparableB : IComparable
         {
             return selectorA(A).CompareTo(selectorB());
+        }
+        /// <summary>
+        /// Calls passed Action for each item in IEnumerable collection
+        /// </summary>
+        /// <typeparam name="T"><see cref="IEnumerable{T}"/></typeparam>
+        /// <param name="source">Source Collection</param>
+        /// <param name="action">Action that will be called for each item</param>
+        /// <returns>Source Collection</returns>
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            foreach (var item in source)
+            {
+                action(item);
+            }
+            return source;
         }
     }
 }
