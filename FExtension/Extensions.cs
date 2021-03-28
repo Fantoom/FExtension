@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FExtension
 {
@@ -90,6 +91,29 @@ namespace FExtension
         }
 
         /// <summary>
+        /// Returns IEnumerable of objects wrapped into Comparable with provided selector
+        /// </summary>
+        /// <typeparam name="T">Type of object that will be wrapped</typeparam>
+        /// <param name="source">Source collection</param>
+        /// <param name="selector">Delegate which returns object that will compared</param>
+        /// <returns>IEnumerable of Comparable objects</returns>
+        public static IEnumerable<Comparable<T>> ToComparable<T>(this IEnumerable<T> source, Func<T, IComparable> selector)
+        {
+            return source.Select(x => new Comparable<T>(x, selector));
+        }
+        /// <summary>
+        /// Wraps an object into Comparable with provided selector
+        /// </summary>
+        /// <typeparam name="T">Type of object that will be wrapped</typeparam>
+        /// <param name="obj">The object that will be wrapped</param>
+        /// <param name="selector">Delegate which returns object that will compared</param>
+        /// <returns>Returns and object wrapped into Comparable with provided selector</returns>
+        public static Comparable<T> ToComparableObject<T>(this T obj, Func<T, IComparable> selector)
+        {
+            return new Comparable<T>(obj, selector);
+        }
+
+        /// <summary>
         /// Calls passed Action for each item in IEnumerable collection
         /// </summary>
         /// <typeparam name="T">Type of item</typeparam>
@@ -113,7 +137,7 @@ namespace FExtension
         /// Calls action for items in collection 
         /// </summary>
         /// <typeparam name="T">Type of item</typeparam>
-        /// <param name="source">Source Collection</param>
+        /// <param name="source">Source collection</param>
         /// <param name="action">Action that will be called for each item</param>
         /// <param name="startIndex">Start value of index</param>
         /// <param name="indexIncrement">The Func to set the way of index incrementation. Default is index++</param>
