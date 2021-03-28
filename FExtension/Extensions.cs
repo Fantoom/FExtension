@@ -101,6 +101,7 @@ namespace FExtension
         {
             return source.Select(x => new Comparable<T>(x, selector));
         }
+
         /// <summary>
         /// Wraps an object into Comparable with provided selector
         /// </summary>
@@ -133,6 +134,7 @@ namespace FExtension
             }
             return source;
         }
+
         /// <summary>
         /// Calls action for items in collection 
         /// </summary>
@@ -161,6 +163,7 @@ namespace FExtension
             }
             return source;
         }
+
         /// <summary>
         /// Calls action for items in collection based on index 
         /// </summary>
