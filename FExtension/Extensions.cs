@@ -209,5 +209,28 @@ namespace FExtension
             }
             return source;
         }
+
+        /// <summary>
+        /// Invokes all sub-delegates and returns resulls 
+        /// </summary>
+        /// <typeparam name="T">Type of result</typeparam>
+        /// <param name="func">Delegate that will be Invoked</param>
+        /// <returns>List of results</returns>
+        public static List<T> MultiResultInvoke<T>(this Delegate func)
+        {
+            var delegateList = func.GetInvocationList();
+            if (delegateList.Length == 0)
+            {
+                return new List<T>();
+            }
+            else if (delegateList.Length == 1)
+            {
+                var result = new List<T>();
+                result.Add((T)delegateList[0].DynamicInvoke());
+                return result;
+            }
+
+            return delegateList.Select(x => x.MultiResultInvoke<T>()).SelectMany(x => x).ToList();
+        }
     }
 }
