@@ -211,7 +211,7 @@ namespace FExtension
         }
 
         /// <summary>
-        /// Invokes all sub-delegates and returns resulls 
+        /// Invokes all sub-delegates and returns results 
         /// </summary>
         /// <typeparam name="T">Type of result</typeparam>
         /// <param name="func">Delegate that will be Invoked</param>
