@@ -99,6 +99,11 @@ namespace FExtension
         /// <returns>IEnumerable of Comparable objects</returns>
         public static IEnumerable<Comparable<T>> ToComparable<T>(this IEnumerable<T> source, Func<T, IComparable> selector)
         {
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (selector is null)
+                throw new ArgumentNullException(nameof(selector));
+
             return source.Select(x => new Comparable<T>(x, selector));
         }
 
@@ -111,6 +116,11 @@ namespace FExtension
         /// <returns>Returns and object wrapped into Comparable with provided selector</returns>
         public static Comparable<T> ToComparableObject<T>(this T obj, Func<T, IComparable> selector)
         {
+            if (source is null)
+                throw new ArgumentNullException(nameof(obj));
+            if (selector is null)
+                throw new ArgumentNullException(nameof(selector));
+
             return new Comparable<T>(obj, selector);
         }
 
