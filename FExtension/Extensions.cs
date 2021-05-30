@@ -215,8 +215,9 @@ namespace FExtension
         /// </summary>
         /// <typeparam name="T">Type of result</typeparam>
         /// <param name="func">Delegate that will be Invoked</param>
+        /// <param name="args">Arguments that will be passed</param>
         /// <returns>List of results</returns>
-        public static List<T> MultiResultInvoke<T>(this Delegate func)
+        public static List<T> MultiResultInvoke<T>(this Delegate func, params Object[] args)
         {
             var delegateList = func.GetInvocationList();
             if (delegateList.Length == 0)
@@ -226,11 +227,11 @@ namespace FExtension
             else if (delegateList.Length == 1)
             {
                 var result = new List<T>();
-                result.Add((T)delegateList[0].DynamicInvoke());
+                result.Add((T)delegateList[0].DynamicInvoke(args));
                 return result;
             }
 
-            return delegateList.Select(x => x.MultiResultInvoke<T>()).SelectMany(x => x).ToList();
+            return delegateList.Select(x => x.MultiResultInvoke<T>(args)).SelectMany(x => x).ToList();
         }
     }
 }
