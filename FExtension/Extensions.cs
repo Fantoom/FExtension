@@ -219,6 +219,9 @@ namespace FExtension
         /// <returns>List of results</returns>
         public static List<T> MultiResultInvoke<T>(this Delegate func, params Object[] args)
         {
+            if(func is null)
+                throw new ArgumentNullException(nameof(func));
+
             var delegateList = func.GetInvocationList();
             if (delegateList.Length == 0)
             {
